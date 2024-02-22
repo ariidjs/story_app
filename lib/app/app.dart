@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:story_app/app/routes/app_routes.dart';
 
 import 'bindings/initial_bindings.dart';
 import 'core/values/app_colors.dart';
-import 'routes/app_pages.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -15,11 +15,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetMaterialApp.router(
       title: 'Story App',
-      initialRoute: AppPages.INITIAL,
-      initialBinding: InitialBinding(),
-      getPages: AppPages.routes,
+      routeInformationParser: goRouter.routeInformationParser,
+      routerDelegate: goRouter.routerDelegate,
+      routeInformationProvider: goRouter.routeInformationProvider,
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         brightness: Brightness.dark,

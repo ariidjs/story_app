@@ -1,10 +1,14 @@
-import 'package:flutter/services.dart';
-import 'package:story_app/app/core/values/constants.dart';
-import 'package:story_app/app/data/models/restaurant.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:story_app/app/core/di/injector.dart';
 
 class LocalRepository {
-  Future<Restaurants> getListRestaurant() async {
-    var data = await rootBundle.loadString(Constants.jsonPath);
-    return Restaurants.fromJson(data);
+  final storage = injector.get<GetStorage>();
+  final BehaviorSubject<String?> _authState = BehaviorSubject.seeded(null);
+
+  String? get token => _authState.value;
+
+  Stream<String?> authStateChanges() {
+    return _authState.stream;
   }
 }

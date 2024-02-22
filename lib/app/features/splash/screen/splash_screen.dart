@@ -6,9 +6,7 @@ import '../../../core/base/base.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashScreen extends BaseView<SplashController> {
-  SplashScreen({super.key}) {
-    controller.setUp();
-  }
+  SplashScreen({super.key});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -19,10 +17,10 @@ class SplashScreen extends BaseView<SplashController> {
   Widget body(BuildContext context) {
     return Container(
       color: AppColors.colorPrimary,
-      child: Center(
-          child: Image.asset(
-        '${Constants.imgPath}img_logo.png',
-      )),
+      // child: Center(
+      //     child: Image.asset(
+      //   '${Constants.imgPath}img_logo.png',
+      // )),
     );
   }
 }
