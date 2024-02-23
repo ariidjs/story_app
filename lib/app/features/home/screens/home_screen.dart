@@ -10,6 +10,11 @@ class HomeScreen extends BaseView<HomeController> {
 
   @override
   Widget body(BuildContext context) {
-    return Text('Home');
+    return GestureDetector(
+      child: Text('Home'),
+      onTap: () {
+        controller.signOut();
+      },
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:story_app/app/core/values/app_colors.dart';
 
 TextStyle normalTextStyles =
     const TextStyle(fontFamily: 'EBGaramond', fontSize: 16);
@@ -12,3 +13,10 @@ TextStyle largeTextStyles =
     const TextStyle(fontFamily: 'EBGaramond', fontSize: 20);
 TextStyle largeBoldTextStyles = const TextStyle(
     fontFamily: 'EBGaramond', fontSize: 20, fontWeight: FontWeight.bold);
+
+ButtonStyle primaryBtn = ElevatedButton.styleFrom(
+    backgroundColor: AppColors.colorOnPrimary,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)));
+ButtonStyle disabledPrimaryBtn = ElevatedButton.styleFrom(
+    backgroundColor: AppColors.colorGrey,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)));

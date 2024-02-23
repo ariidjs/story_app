@@ -46,7 +46,7 @@ abstract class BaseView<Controller extends BaseController>
   Widget pageScaffold(BuildContext context) {
     return Scaffold(
       backgroundColor: pageBackgroundColor(),
-      // key: globalKey,
+      key: globalKey,
       appBar: appBar(context),
       extendBodyBehindAppBar: true,
       body: pageContent(context),
