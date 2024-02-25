@@ -7,12 +7,12 @@ abstract class AppColors {
   static const Color appBarIconColor = Color(0xFFFFFFFF);
   static const Color appBarTextColor = Color(0xFFFFFFFF);
 
-  static const Color colorPrimary = Color(0xFFFE7AD6);
-  static const Color colorOnPrimary = Color.fromARGB(205, 252, 88, 203);
+  static const Color colorPrimary = Color.fromARGB(255, 250, 157, 222);
+  static const Color colorOnPrimary = Color(0xCDFC58CB);
 
   static const Color colorWhite = Color(0xFFFFFFFF);
   static const Color colorBlack = Color(0xFF000000);
   static const Color colorGrey = Color(0xffA4A8AE);
 
-  static const Color lightGreyColor = Color(0xFFC4C4C4);
+  static const Color lightGreyColor = Color(0xFFEDEDED);
 }
