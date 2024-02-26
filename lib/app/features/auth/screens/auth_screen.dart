@@ -3,18 +3,16 @@ import 'package:get/state_manager.dart';
 import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
 import 'package:story_app/app/core/values/app_styles.dart';
-import 'package:story_app/app/core/widget/custom_text_field.dart';
 import 'package:story_app/app/features/auth/controllers/auth_controller.dart';
 import 'package:story_app/app/features/auth/widgets/login_form.dart';
+import 'package:story_app/app/features/auth/widgets/signup_form.dart';
 
 class AuthScreen extends BaseView<AuthController> {
   AuthScreen({super.key});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: AppColors.colorPrimary,
-    );
+    return AppBar(backgroundColor: AppColors.colorPrimary);
   }
 
   @override
@@ -24,7 +22,8 @@ class AuthScreen extends BaseView<AuthController> {
         background(),
         Align(
           alignment: AlignmentDirectional.bottomCenter,
-          child: SingleChildScrollView(
+          child: SizedBox(
+            height: 400,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: const BoxDecoration(
@@ -35,14 +34,14 @@ class AuthScreen extends BaseView<AuthController> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 16),
                     _buildHeader(),
                     const SizedBox(height: 16),
-                    _buildContent()
+                    Expanded(child: _buildContent())
                   ],
                 ),
               ),
@@ -60,7 +59,7 @@ class AuthScreen extends BaseView<AuthController> {
         borderRadius: BorderRadius.circular(24),
       ),
       height: 60,
-      padding: EdgeInsets.all(6),
+      padding: const EdgeInsets.all(6),
       child: Row(
         children: [
           Obx(
@@ -83,8 +82,8 @@ class AuthScreen extends BaseView<AuthController> {
                           )),
                         ),
                       )
-                    : Padding(
-                        padding: const EdgeInsets.all(8.0),
+                    : const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Center(child: Text('Sign in')),
                       ),
               ),
@@ -110,8 +109,8 @@ class AuthScreen extends BaseView<AuthController> {
                             )),
                           ),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
+                      : const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Center(child: Text('Sign up')),
                         ),
                 )),
@@ -124,12 +123,37 @@ class AuthScreen extends BaseView<AuthController> {
   background() {
     return Container(
       decoration: const BoxDecoration(color: AppColors.colorPrimary),
+      constraints: const BoxConstraints(
+          minWidth: double.infinity, minHeight: double.infinity),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 24),
+            Text(
+              'Go ahead and set up your account',
+              style: largeBoldTextStyles.copyWith(
+                  color: AppColors.colorWhite, fontSize: 30),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Sign in-up to enjoy the everyone stories',
+              style: normalTextStyles.copyWith(color: AppColors.lightGreyColor),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
-  _buildContent() {
-    return Obx(() => controller.authType.value == AuthType.signIn
-        ? LoginForm()
-        : Container());
+  Widget _buildContent() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Obx(() => controller.authType.value == AuthType.signIn
+          ? const LoginForm()
+          : SignUpForm()),
+    );
   }
 }

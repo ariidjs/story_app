@@ -16,7 +16,7 @@ TextStyle largeBoldTextStyles = const TextStyle(
 
 ButtonStyle primaryBtn = ElevatedButton.styleFrom(
     backgroundColor: AppColors.colorOnPrimary,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)));
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)));
 ButtonStyle disabledPrimaryBtn = ElevatedButton.styleFrom(
-    backgroundColor: AppColors.colorGrey,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)));
+    backgroundColor: AppColors.colorOnPrimary.withOpacity(0.4),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)));

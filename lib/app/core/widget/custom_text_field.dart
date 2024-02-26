@@ -12,24 +12,27 @@ class CustomFormField extends StatefulWidget {
   final int? maxLength;
   final int? maxLines;
   final bool readOnly;
+  final Widget? prefixIcon;
   final ValueChanged<String>? onChanged;
   final FormFieldValidator<String>? validator;
   final Function()? onEditingComplete;
 
-  const CustomFormField(
-      {super.key,
-      required this.title,
-      this.obscureText = false,
-      this.controller,
-      this.isShowTitle = true,
-      this.keyboardType,
-      this.onFieldSubmitted,
-      this.maxLength,
-      this.onChanged,
-      this.maxLines = 1,
-      this.validator,
-      this.readOnly = false,
-      this.onEditingComplete});
+  const CustomFormField({
+    super.key,
+    required this.title,
+    this.obscureText = false,
+    this.controller,
+    this.isShowTitle = false,
+    this.keyboardType,
+    this.onFieldSubmitted,
+    this.maxLength,
+    this.onChanged,
+    this.maxLines = 1,
+    this.validator,
+    this.readOnly = false,
+    this.onEditingComplete,
+    this.prefixIcon,
+  });
 
   @override
   State<CustomFormField> createState() => _CustomFormFieldState();
@@ -62,13 +65,13 @@ class _CustomFormFieldState extends State<CustomFormField> {
           cursorColor: AppColors.colorOnPrimary,
           autovalidateMode: AutovalidateMode.always,
           obscureText: widget.obscureText ? !isShowPassword : false,
-          style: normalTextStyles.copyWith(
-            fontSize: 16,
-          ),
+          style: normalTextStyles.copyWith(fontSize: 16),
           decoration: InputDecoration(
+            counterText: '',
             hintText: !widget.isShowTitle ? widget.title : null,
             hintStyle: normalTextStyles.copyWith(
-                fontSize: 14, color: AppColors.lightGreyColor),
+                fontSize: 14, color: AppColors.colorGrey),
+            prefixIcon: widget.prefixIcon,
             suffixIcon: widget.obscureText
                 ? IconButton(
                     icon: isShowPassword
@@ -86,14 +89,11 @@ class _CustomFormFieldState extends State<CustomFormField> {
                   )
                 : null,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: widget.isShowTitle
-                  ? const BorderSide(color: AppColors.colorBlack)
-                  : BorderSide.none,
-            ),
+                borderRadius: BorderRadius.circular(14),
+                borderSide: const BorderSide(color: AppColors.lightGreyColor)),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
-              borderSide: const BorderSide(color: AppColors.colorBlack),
+              borderSide: const BorderSide(color: AppColors.colorPrimary),
             ),
             contentPadding: const EdgeInsets.all(12),
             filled: widget.isShowTitle ? false : true,
