@@ -7,12 +7,13 @@ class CustomButton extends StatefulWidget {
   final Function? onPressed;
   final String title;
   final ButtonState? state;
-  const CustomButton({
-    super.key,
-    required this.onPressed,
-    required this.title,
-    this.state = ButtonState.idle,
-  });
+  final Icon? icon;
+  const CustomButton(
+      {super.key,
+      required this.onPressed,
+      required this.title,
+      this.state = ButtonState.idle,
+      this.icon});
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -25,7 +26,7 @@ class _CustomButtonState extends State<CustomButton> {
       iconedButtons: {
         ButtonState.idle: IconedButton(
             text: widget.title,
-            icon: const Icon(Icons.send, color: Colors.white),
+            icon: widget.icon ?? Icon(Icons.send),
             color: AppColors.colorOnPrimary),
         ButtonState.loading: const IconedButton(
           text: "Loading",

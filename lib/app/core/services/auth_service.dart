@@ -11,6 +11,8 @@ class AuthService extends BaseController {
 
   final storage = injector.get<GetStorage>();
 
+  String get token => storage.read(Constants.keyToken);
+
   Future<void> checkAuth() async {
     await Future.delayed(const Duration(seconds: 3));
     if (storage.read(Constants.keyToken) == null) {

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:progress_state_button/iconed_button.dart';
 import 'package:progress_state_button/progress_button.dart';
-import 'package:story_app/app/core/models/page_state.dart';
+import 'package:story_app/app/core/models/ui_state.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
-import 'package:story_app/app/core/values/app_styles.dart';
 import 'package:story_app/app/core/widget/custom_button.dart';
 import 'package:story_app/app/core/widget/custom_text_field.dart';
 import 'package:story_app/app/features/auth/controllers/auth_controller.dart';
@@ -96,40 +94,18 @@ class SignUpForm extends StatelessWidget {
                   : null,
             ),
             const SizedBox(height: 24),
-
             Container(
-              constraints: BoxConstraints(minWidth: double.infinity),
+              constraints: const BoxConstraints(minWidth: double.infinity),
               child: Obx(
                 () => CustomButton(
                   title: 'Sign Up',
-                  onPressed: () {
-                    controller.updatePageState(PageState.LOADING);
-                  },
-                  state: controller.pageState == PageState.LOADING
+                  onPressed: () => controller.signUp(),
+                  state: controller.uiState == UiState.loading
                       ? ButtonState.loading
                       : ButtonState.idle,
                 ),
               ),
             )
-            // Container(
-            //   constraints: const BoxConstraints(minWidth: double.infinity),
-            //   child: ElevatedButton(
-            //     style: primaryBtn,
-            //     onPressed: () {
-            //       controller.updatePageState(PageState.LOADING);
-            //     },
-            //     child: const Padding(
-            //       padding: EdgeInsets.all(16.0),
-            //       child: Text(
-            //         'Sign Up',
-            //         style: TextStyle(
-            //             fontSize: 16,
-            //             color: Colors.white,
-            //             fontWeight: FontWeight.bold),
-            //       ),
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

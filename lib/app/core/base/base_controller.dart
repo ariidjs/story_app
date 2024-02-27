@@ -1,17 +1,17 @@
 part of 'base.dart';
 
 abstract class BaseController extends GetxController {
-  final _pageSateController = PageState.DEFAULT.obs;
+  final _uiStateController = UiState.defaults.obs;
 
-  PageState get pageState => _pageSateController.value;
+  UiState get uiState => _uiStateController.value;
 
-  updatePageState(PageState state) => _pageSateController(state);
+  updateUiState(UiState state) => _uiStateController(state);
 
-  resetPageState() => _pageSateController(PageState.DEFAULT);
+  resetUiState() => _uiStateController(UiState.defaults);
 
-  showLoading() => updatePageState(PageState.LOADING);
+  showLoading() => updateUiState(UiState.loading);
 
-  hideLoading() => resetPageState();
+  hideLoading() => resetUiState();
 
   final _messageController = ''.obs;
 
@@ -35,28 +35,57 @@ abstract class BaseController extends GetxController {
 
   @override
   void onClose() {
-    _messageController.close();
-    _pageSateController.close();
+    _errorMessageController.close();
+    _uiStateController.close();
     super.onClose();
   }
 
   dynamic callDataService<T>(
     Future<T> future, {
     Function(T response)? onSuccess,
+    Function(Exception exception)? onError,
     Function? onStart,
     Function? onComplete,
   }) async {
+    Exception? exception;
+
     onStart == null ? showLoading() : onStart();
-    await Future.delayed(const Duration(seconds: 2));
     try {
       final T response = await future;
 
       if (onSuccess != null) onSuccess(response);
+
       onComplete == null ? hideLoading() : onComplete();
+
       return response;
+    } on ServiceUnavailableException catch (ex) {
+      exception = ex;
+      showErrorMessage(ex.message);
+    } on TimeoutException catch (ex) {
+      exception = ex;
+      showErrorMessage(ex.message);
+    } on NetworkException catch (ex) {
+      exception = ex;
+      showErrorMessage(ex.message);
+    } on JsonFormatException catch (ex) {
+      exception = ex;
+      showErrorMessage(ex.message);
+    } on NotFoundException catch (ex) {
+      exception = ex;
+      showErrorMessage(ex.message);
+    } on ApiException catch (ex) {
+      exception = ex;
+      showErrorMessage(ex.message);
+    } on AppException catch (ex) {
+      exception = ex;
+      showErrorMessage(ex.message);
     } catch (error) {
-      showErrorMessage(error.toString());
+      exception = AppException(message: "$error");
+      debugPrint("Controller>>>>>> error $error");
+      showErrorMessage(errorMessage);
     }
+
+    if (onError != null) onError(exception);
 
     onComplete == null ? hideLoading() : onComplete();
   }

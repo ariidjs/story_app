@@ -8,12 +8,14 @@ import '../network/error_handlers.dart';
 
 abstract class BaseRemoteSource {
   Dio get dioClient => DioProvider.httpDio;
+  Dio get dioClientWithAuth => DioProvider.dioWithHeaderToken;
 
   Future<Response<T>> callApiWithErrorParser<T>(Future<Response<T>> api) async {
     try {
       Response<T> response = await api;
 
-      if (response.statusCode != HttpStatus.ok) {
+      if (response.statusCode != HttpStatus.ok ||
+          response.statusCode != HttpStatus.created) {
         debugPrint('Error with code : ${response.statusCode}');
       }
 

@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:progress_state_button/progress_button.dart';
+import 'package:story_app/app/core/models/ui_state.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
-import 'package:story_app/app/core/values/app_styles.dart';
+import 'package:story_app/app/core/widget/custom_button.dart';
 import 'package:story_app/app/core/widget/custom_text_field.dart';
 import 'package:story_app/app/features/auth/controllers/auth_controller.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+final emailController = TextEditingController();
+final passwordController = TextEditingController();
+
+final AuthController controller = Get.find();
+
+class _LoginFormState extends State<LoginForm> {
+  @override
   Widget build(BuildContext context) {
-    final AuthController controller = Get.find();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -25,9 +36,6 @@ class LoginForm extends StatelessWidget {
     );
   }
 }
-
-final emailController = TextEditingController();
-final passwordController = TextEditingController();
 
 Widget _buildEmailField(AuthController controller) {
   return Container(
@@ -78,19 +86,13 @@ Widget _buildLoginBtn(AuthController controller) {
   return Container(
     constraints: const BoxConstraints(minWidth: double.infinity),
     child: Obx(
-      () => ElevatedButton(
-        style: controller.isEmailValid.value && controller.isPasswordValid.value
-            ? primaryBtn
-            : disabledPrimaryBtn,
-        onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text(
-            'Sign In',
-            style: TextStyle(
-                fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ),
+      () => CustomButton(
+        title: 'Sign In',
+        icon: const Icon(Icons.login),
+        onPressed: () => controller.signIn(),
+        state: controller.uiState == UiState.loading
+            ? ButtonState.loading
+            : ButtonState.idle,
       ),
     ),
   );

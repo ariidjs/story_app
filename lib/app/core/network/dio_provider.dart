@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:story_app/app/core/di/injector.dart';
+import 'package:story_app/app/core/services/auth_service.dart';
+import 'package:story_app/app/core/values/constants.dart';
 import 'package:story_app/app/data/api_config.dart';
 
 import 'pretty_dio_logger.dart';
@@ -35,5 +39,15 @@ class DioProvider {
 
       return _instance!;
     }
+  }
+
+  static Dio get dioWithHeaderToken {
+    final token = injector.get<AuthService>().token;
+    _instance ??= httpDio;
+    _instance!.interceptors.clear();
+    _options.headers['Authorization'] = 'Bearer $token';
+
+    _instance!.interceptors.add(_prettyDioLogger);
+    return _instance!;
   }
 }

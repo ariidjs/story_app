@@ -16,9 +16,9 @@ abstract class BaseView<Controller extends BaseController>
       child: Stack(
         children: [
           annotatedRegion(context),
-          Obx(() => controller.pageState == PageState.LOADING
-              ? _showLoading()
-              : Container()),
+          // Obx(() => controller.uiState == UiState.loading
+          //     ? _showLoading()
+          //     : Container()),
           Obx(() => controller.errorMessage.isNotEmpty
               ? showErrorSnackBar(controller.errorMessage)
               : Container()),
@@ -60,7 +60,14 @@ abstract class BaseView<Controller extends BaseController>
   }
 
   Widget showErrorSnackBar(String message) {
-    final snackBar = SnackBar(content: Text(message));
+    // debugPrint("TEST ${Get.context}");
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: normalTextStyles.copyWith(color: AppColors.colorWhite),
+      ),
+      backgroundColor: AppColors.colorRed,
+    );
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ScaffoldMessenger.of(Get.context!).showSnackBar(snackBar);
     });
@@ -81,7 +88,7 @@ abstract class BaseView<Controller extends BaseController>
     return AppColors.colorPrimary;
   }
 
-  Widget _showLoading() {
+  Widget showLoading() {
     return Center(
         child: Platform.isIOS
             ? const CupertinoActivityIndicator(

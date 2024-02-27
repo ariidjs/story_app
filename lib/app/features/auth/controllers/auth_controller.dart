@@ -66,12 +66,18 @@ class AuthController extends BaseController {
     );
   }
 
-  void signUp() {
-    callDataService(
-      _repo.signUp(SignUpRequest(
-          name: name.value, email: email.value, password: password.value)),
-      onSuccess: (_) => authType.value == AuthType.signIn,
-    );
+  void signUp() async {
+    if (isEmailValid.value &&
+        isNameValid.value &&
+        isPasswordSame.value &&
+        isPasswordValid.value) {
+      callDataService(
+          _repo.signUp(SignUpRequest(
+              name: name.value, email: email.value, password: password.value)),
+          onSuccess: (_) => authType.value = AuthType.signIn);
+    } else {
+      showErrorMessage('Please fill required data');
+    }
   }
 }
 
