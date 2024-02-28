@@ -1,0 +1,21 @@
+{
+    "signIn" : "Masuk",
+    "signUp" : "Daftar",
+    "setupDesc" : "Silahkan daftar akun baru",
+    "setupDesc2" : "Masuk/Daftar untuk melihat cerita mereka",
+    "email" : "Email",
+    "password" : "Kata Sandi",
+    "confPassword" : "Konfirmasi Kata sandi",
+    "invalidEmail" : "Email Salah",
+    "invalidPassword" : "Password Salah",
+    "name" : "Nama",
+    "requiredField" : "Wajib di isi",
+    "passwordNotMatch" : "Password tidak cocok",
+    "fillRequiredData" : "Mohon isi data yang dibutuhkan",
+    "showMore" : "Lihat lagi",
+    "showLess" : "Tutup",
+    "camera" : "Kamera", 
+    "gallery" : "Galeri",
+    "addStory" : "Tambah Cerita baru",
+    "addDesc" : "Tambahkan deskripsi..."
+}

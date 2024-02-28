@@ -1,7 +1,8 @@
 class StoriesResponse {
   bool? error;
   String? message;
-  List<ListStory>? listStory;
+  List<Story>? listStory;
+  Story? story;
 
   StoriesResponse({this.error, this.message, this.listStory});
 
@@ -9,25 +10,29 @@ class StoriesResponse {
     error = json['error'];
     message = json['message'];
     if (json['listStory'] != null) {
-      listStory = <ListStory>[];
+      listStory = <Story>[];
       json['listStory'].forEach((v) {
-        listStory!.add(ListStory.fromJson(v));
+        listStory!.add(Story.fromJson(v));
       });
     }
+    story = json['story'] != null ? Story.fromJson(json['story']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['error'] = error;
     data['message'] = message;
     if (listStory != null) {
       data['listStory'] = listStory!.map((v) => v.toJson()).toList();
     }
+    if (story != null) {
+      data['story'] = story!.toJson();
+    }
     return data;
   }
 }
 
-class ListStory {
+class Story {
   String? id;
   String? name;
   String? description;
@@ -36,7 +41,7 @@ class ListStory {
   double? lat;
   double? lon;
 
-  ListStory(
+  Story(
       {this.id,
       this.name,
       this.description,
@@ -45,7 +50,7 @@ class ListStory {
       this.lat,
       this.lon});
 
-  ListStory.fromJson(Map<String, dynamic> json) {
+  Story.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];

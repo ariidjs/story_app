@@ -6,4 +6,6 @@ class Endpoint {
   static var signUp = '$baseUrl/register';
   static var signIn = '$baseUrl/login';
   static var stories = '$baseUrl/stories';
+  static var addStories = '$baseUrl/stories';
+  static String detail(String id) => '/stories/$id';
 }

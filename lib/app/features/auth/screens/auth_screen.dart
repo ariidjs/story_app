@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
 import 'package:story_app/app/core/values/app_styles.dart';
@@ -77,14 +77,16 @@ class AuthScreen extends BaseView<AuthController> {
                           padding: const EdgeInsets.all(8.0),
                           child: Center(
                               child: Text(
-                            'Sign in',
+                            AppLocalizations.of(Get.context!)!.signIn,
                             style: normalBoldTextStyles,
                           )),
                         ),
                       )
-                    : const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(child: Text('Sign in')),
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Text(
+                                AppLocalizations.of(Get.context!)!.signIn)),
                       ),
               ),
             ),
@@ -104,14 +106,16 @@ class AuthScreen extends BaseView<AuthController> {
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
                                 child: Text(
-                              'Sign up',
+                              AppLocalizations.of(Get.context!)!.signUp,
                               style: normalBoldTextStyles,
                             )),
                           ),
                         )
-                      : const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Center(child: Text('Sign up')),
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                              child: Text(
+                                  AppLocalizations.of(Get.context!)!.signUp)),
                         ),
                 )),
           ),
@@ -133,13 +137,13 @@ class AuthScreen extends BaseView<AuthController> {
           children: [
             const SizedBox(height: 24),
             Text(
-              'Go ahead and set up your account',
+              AppLocalizations.of(Get.context!)!.setupDesc,
               style: largeBoldTextStyles.copyWith(
                   color: AppColors.colorWhite, fontSize: 30),
             ),
             const SizedBox(height: 16),
             Text(
-              'Sign in-up to enjoy the everyone stories',
+              AppLocalizations.of(Get.context!)!.setupDesc2,
               style: normalTextStyles.copyWith(color: AppColors.lightGreyColor),
             ),
           ],

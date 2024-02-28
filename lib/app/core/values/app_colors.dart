@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+export 'package:story_app/common.dart';
 
 abstract class AppColors {
   static const Color pageBackground = Color(0xF2FFFFFF);

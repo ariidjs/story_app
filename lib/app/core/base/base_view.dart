@@ -50,6 +50,7 @@ abstract class BaseView<Controller extends BaseController>
       appBar: appBar(context),
       extendBodyBehindAppBar: true,
       body: pageContent(context),
+      floatingActionButton: floatingActionButton(),
     );
   }
 
@@ -57,6 +58,10 @@ abstract class BaseView<Controller extends BaseController>
     return SafeArea(
       child: body(context),
     );
+  }
+
+  Widget? floatingActionButton() {
+    return null;
   }
 
   Widget showErrorSnackBar(String message) {

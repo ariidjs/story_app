@@ -1,0 +1,21 @@
+{
+    "signIn" : "Sign In",
+    "signUp" : "Sign Up",
+    "setupDesc" : "Go ahead and set up your account",
+    "setupDesc2" : "Sign in-up to enjoy the everyone stories",
+    "email" : "Email",
+    "password" : "Password",
+    "confPassword" : "Confirm Password",
+    "invalidEmail" : "Invalid Email",
+    "invalidPassword" : "Invalid Password",
+    "name" : "Name",
+    "requiredField" : "Required Field",
+    "passwordNotMatch" : "Password do not match",
+    "fillRequiredData" : "Please fill required data",
+    "showMore" : "Show More",
+    "showLess" : "Show Less",
+    "camera" : "Camera", 
+    "gallery" : "Gallery",
+    "addStory" : "Add New Story",
+    "addDesc" : "Type a description..."
+}

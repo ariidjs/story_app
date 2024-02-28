@@ -8,8 +8,8 @@ class HomeController extends BaseController {
 
   final isReadMore = true.obs;
 
-  final RxList<ListStory> _storiesController = RxList.empty();
-  List<ListStory> get stories => _storiesController.toList();
+  final RxList<Story> _storiesController = RxList.empty();
+  List<Story> get stories => _storiesController.toList();
 
   @override
   void onInit() {

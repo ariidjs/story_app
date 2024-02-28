@@ -21,6 +21,12 @@ dependencies:
   get_storage: ^2.1.1
   rxdart: ^0.27.7
   progress_state_button: "^1.0.4"
+  floating_action_bubble: ^1.1.4
+  image_picker: ^1.0.2
+  cached_network_image: ^3.3.1
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -30,16 +36,12 @@ dev_dependencies:
 
 
 flutter:
+  generate: true
   uses-material-design: true
 
   assets:
     - assets/img/
-  # fonts:
-  #   - family: EBGaramond
-  #     fonts:
-  #       - asset: assets/fonts/EBGaramond/EBGaramond-Regular.ttf  
-  #       - asset: assets/fonts/EBGaramond/EBGaramond-Regular.ttf  
-  #       - asset: assets/fonts/EBGaramond/EBGaramond-Bold.ttf 
-  #       - asset: assets/fonts/EBGaramond/EBGaramond-SemiBold.ttf
-  #       - asset: assets/fonts/EBGaramond/EBGaramond-Medium.ttf 
-  #       - asset: assets/fonts/EBGaramond/EBGaramond-ExtraBold.ttf      
+  fonts:
+    - family: Lobster
+      fonts:
+        - asset: assets/fonts/Lobster/Lobster-Regular.ttf   

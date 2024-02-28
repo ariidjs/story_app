@@ -76,7 +76,7 @@ class AuthController extends BaseController {
               name: name.value, email: email.value, password: password.value)),
           onSuccess: (_) => authType.value = AuthType.signIn);
     } else {
-      showErrorMessage('Please fill required data');
+      showErrorMessage(AppLocalizations.of(Get.context!)!.fillRequiredData);
     }
   }
 }

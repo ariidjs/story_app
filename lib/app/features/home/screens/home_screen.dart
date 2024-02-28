@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
-import 'package:story_app/app/core/values/app_styles.dart';
 import 'package:story_app/app/features/home/controllers/home_controller.dart';
+import 'package:story_app/app/features/home/widgets/custom_floating_btn.dart';
 import 'package:story_app/app/features/home/widgets/item_story.dart';
 
 class HomeScreen extends BaseView<HomeController> {
@@ -12,13 +12,15 @@ class HomeScreen extends BaseView<HomeController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return AppBar(
-      title: Text(
-        'Stories',
-        style: largeBoldTextStyles.copyWith(color: AppColors.colorPrimary),
-      ),
+      title: const Text('Dicoding Story'),
       centerTitle: true,
       backgroundColor: AppColors.colorWhite,
     );
+  }
+
+  @override
+  Widget? floatingActionButton() {
+    return const CustomFloatingButton();
   }
 
   @override

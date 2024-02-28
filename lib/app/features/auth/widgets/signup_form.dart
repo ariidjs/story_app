@@ -29,7 +29,7 @@ class SignUpForm extends StatelessWidget {
               height: 24,
             ),
             CustomFormField(
-              title: 'Name',
+              title: AppLocalizations.of(Get.context!)!.name,
               controller: nameController,
               keyboardType: TextInputType.name,
               prefixIcon: const Icon(
@@ -39,13 +39,13 @@ class SignUpForm extends StatelessWidget {
               onChanged: (value) => controller.name.value = value,
               validator: (_) => nameController.text.isNotEmpty
                   ? !controller.isNameValid.value
-                      ? 'Required field'
+                      ? AppLocalizations.of(Get.context!)!.requiredField
                       : null
                   : null,
             ),
             const SizedBox(height: 8),
             CustomFormField(
-              title: 'Email',
+              title: AppLocalizations.of(Get.context!)!.email,
               keyboardType: TextInputType.emailAddress,
               controller: emailController,
               prefixIcon: const Icon(
@@ -55,13 +55,13 @@ class SignUpForm extends StatelessWidget {
               onChanged: (value) => controller.email.value = value,
               validator: (_) => emailController.text.isNotEmpty
                   ? !controller.isEmailValid.value
-                      ? 'Invalid Email'
+                      ? AppLocalizations.of(Get.context!)!.invalidEmail
                       : null
                   : null,
             ),
             const SizedBox(height: 8),
             CustomFormField(
-              title: 'Password',
+              title: AppLocalizations.of(Get.context!)!.password,
               obscureText: true,
               keyboardType: TextInputType.text,
               controller: passwordController,
@@ -72,13 +72,13 @@ class SignUpForm extends StatelessWidget {
               onChanged: (value) => controller.password.value = value,
               validator: (_) => passwordController.text.isNotEmpty
                   ? !controller.isPasswordValid.value
-                      ? 'Invalid Password'
+                      ? AppLocalizations.of(Get.context!)!.invalidPassword
                       : null
                   : null,
             ),
             const SizedBox(height: 8),
             CustomFormField(
-              title: 'Confirm Password',
+              title: AppLocalizations.of(Get.context!)!.confPassword,
               obscureText: true,
               keyboardType: TextInputType.text,
               controller: confpasswordController,
@@ -89,7 +89,7 @@ class SignUpForm extends StatelessWidget {
               onChanged: (value) => controller.confirmPassword.value = value,
               validator: (_) => passwordController.text.isNotEmpty
                   ? !controller.isPasswordSame.value
-                      ? 'Password do not match'
+                      ? AppLocalizations.of(Get.context!)!.passwordNotMatch
                       : null
                   : null,
             ),
@@ -98,7 +98,7 @@ class SignUpForm extends StatelessWidget {
               constraints: const BoxConstraints(minWidth: double.infinity),
               child: Obx(
                 () => CustomButton(
-                  title: 'Sign Up',
+                  title: AppLocalizations.of(Get.context!)!.signUp,
                   onPressed: () => controller.signUp(),
                   state: controller.uiState == UiState.loading
                       ? ButtonState.loading

@@ -41,7 +41,7 @@ Widget _buildEmailField(AuthController controller) {
   return Container(
     margin: const EdgeInsets.only(left: 8, right: 8),
     child: CustomFormField(
-      title: 'Email',
+      title: AppLocalizations.of(Get.context!)!.email,
       isShowTitle: false,
       prefixIcon: const Icon(
         Icons.email,
@@ -52,7 +52,7 @@ Widget _buildEmailField(AuthController controller) {
       onChanged: (value) => controller.email.value = value,
       validator: (_) => emailController.text.isNotEmpty
           ? !controller.isEmailValid.value
-              ? 'Invalid Email'
+              ? AppLocalizations.of(Get.context!)!.invalidEmail
               : null
           : null,
     ),
@@ -63,7 +63,7 @@ Widget _buildPasswordField(AuthController controller) {
   return Container(
     margin: const EdgeInsets.only(left: 8, right: 8),
     child: CustomFormField(
-      title: 'Password',
+      title: AppLocalizations.of(Get.context!)!.password,
       isShowTitle: false,
       obscureText: true,
       prefixIcon: const Icon(
@@ -75,7 +75,7 @@ Widget _buildPasswordField(AuthController controller) {
       onChanged: (value) => controller.password.value = value,
       validator: (_) => passwordController.text.isNotEmpty
           ? !controller.isPasswordValid.value
-              ? 'Invalid Password'
+              ? AppLocalizations.of(Get.context!)!.invalidPassword
               : null
           : null,
     ),
@@ -87,7 +87,7 @@ Widget _buildLoginBtn(AuthController controller) {
     constraints: const BoxConstraints(minWidth: double.infinity),
     child: Obx(
       () => CustomButton(
-        title: 'Sign In',
+        title: AppLocalizations.of(Get.context!)!.signIn,
         icon: const Icon(Icons.login),
         onPressed: () => controller.signIn(),
         state: controller.uiState == UiState.loading
