@@ -17,5 +17,12 @@
     "camera" : "Kamera", 
     "gallery" : "Galeri",
     "addStory" : "Tambah Cerita baru",
-    "addDesc" : "Tambahkan deskripsi..."
+    "addDesc" : "Tambahkan deskripsi...",
+    "chooseLang" : "Pilih Bahasa",
+    "en" : "Bahasa Inggris",
+    "id": "Bahasa Indonesia",
+    "logout" : "Keluar dari akun?",
+    "logoutDesc": "Apakah anda yakin keluar dari akun? Anda akan diarahkan ke halaman login",
+    "yes" : "Ya",
+    "no" : "Tidak"
 }

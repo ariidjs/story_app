@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:story_app/app/core/di/injector.dart';
 import 'package:story_app/app/core/services/language_controller.dart';
 import 'package:story_app/app/routes/app_routes.dart';
-import 'package:story_app/common.dart';
 
 import 'bindings/initial_bindings.dart';
 import 'core/values/app_colors.dart';

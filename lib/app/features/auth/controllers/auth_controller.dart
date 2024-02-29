@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/di/injector.dart';
 import 'package:story_app/app/core/services/auth_service.dart';
+import 'package:story_app/app/core/services/language_controller.dart';
 import 'package:story_app/app/core/utils/validator.dart';
 import 'package:story_app/app/data/models/requests/sign_in_request.dart';
 import 'package:story_app/app/data/models/requests/sign_up_request.dart';
@@ -10,8 +11,11 @@ import 'package:story_app/app/data/repository/story_repository.dart';
 class AuthController extends BaseController {
   final StoryRepository _repo = Get.find(tag: (StoryRepository).toString());
   final authService = injector.get<AuthService>();
+  final langController = injector.get<LanguageController>();
 
   Rx<AuthType> authType = AuthType.signIn.obs;
+
+  final lang = injector.get<LanguageController>();
 
   final email = ''.obs;
   final isEmailValid = false.obs;
@@ -25,12 +29,16 @@ class AuthController extends BaseController {
   final name = ''.obs;
   final isNameValid = false.obs;
 
+  final _currentLang = ''.obs;
+  String get currentLang => _currentLang.value;
+
   @override
   void onInit() {
     _emailCheck();
     _passwordCheck();
     _confirmPasswordCheck();
     _nameCheck();
+    getLang();
     super.onInit();
   }
 
@@ -79,6 +87,8 @@ class AuthController extends BaseController {
       showErrorMessage(AppLocalizations.of(Get.context!)!.fillRequiredData);
     }
   }
+
+  void getLang() => _currentLang.value = langController.currentLang;
 }
 
 enum AuthType {

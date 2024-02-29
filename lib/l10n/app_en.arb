@@ -17,5 +17,12 @@
     "camera" : "Camera", 
     "gallery" : "Gallery",
     "addStory" : "Add New Story",
-    "addDesc" : "Type a description..."
+    "addDesc" : "Type a description...",
+    "chooseLang" : "Choose language",
+    "en" : "English",
+    "id": "Indonesian",
+    "logout" : "Logout account?",
+    "logoutDesc": "Are you sure want to logout? You will direct to Sign in page",
+    "yes" : "Yes",
+    "no" : "No"
 }

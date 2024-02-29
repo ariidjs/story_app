@@ -16,9 +16,9 @@ abstract class BaseView<Controller extends BaseController>
       child: Stack(
         children: [
           annotatedRegion(context),
-          // Obx(() => controller.uiState == UiState.loading
-          //     ? _showLoading()
-          //     : Container()),
+          Obx(() => controller.uiState == UiState.loading
+              ? showLoading()
+              : Container()),
           Obx(() => controller.errorMessage.isNotEmpty
               ? showErrorSnackBar(controller.errorMessage)
               : Container()),
@@ -65,7 +65,6 @@ abstract class BaseView<Controller extends BaseController>
   }
 
   Widget showErrorSnackBar(String message) {
-    // debugPrint("TEST ${Get.context}");
     final snackBar = SnackBar(
       content: Text(
         message,
@@ -83,6 +82,20 @@ abstract class BaseView<Controller extends BaseController>
   void showToast(String message) {
     Fluttertoast.showToast(
         msg: message, toastLength: Toast.LENGTH_SHORT, timeInSecForIosWeb: 1);
+  }
+
+  void showLangDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          backgroundColor: AppColors.colorWhite,
+          content: const LangWidget(),
+        );
+      },
+    );
   }
 
   Color pageBackgroundColor() {

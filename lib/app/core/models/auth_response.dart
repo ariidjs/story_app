@@ -9,12 +9,12 @@ class AuthResponse {
     error = json['error'];
     message = json['message'];
     loginResult = json['loginResult'] != null
-        ? new LoginResult.fromJson(json['loginResult'])
+        ? LoginResult.fromJson(json['loginResult'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['error'] = error;
     data['message'] = message;
     if (loginResult != null) {

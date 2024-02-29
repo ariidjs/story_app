@@ -9,6 +9,7 @@ import 'package:story_app/app/core/models/ui_state.dart';
 import 'package:story_app/app/core/network/exceptions/exceptions.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
 import 'package:story_app/app/core/values/app_styles.dart';
+import 'package:story_app/app/core/widget/lang_widget.dart';
 export 'package:story_app/common.dart';
 
 part 'base_controller.dart';

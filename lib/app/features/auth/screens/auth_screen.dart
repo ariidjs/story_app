@@ -1,3 +1,4 @@
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:story_app/app/core/base/base.dart';
@@ -12,7 +13,30 @@ class AuthScreen extends BaseView<AuthController> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return AppBar(backgroundColor: AppColors.colorPrimary);
+    controller.lang.getLang();
+    return AppBar(
+      backgroundColor: AppColors.colorPrimary,
+      automaticallyImplyLeading: false,
+      titleTextStyle: normalBoldTextStyles,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            controller.lang.currentLang.toUpperCase(),
+            style: normalBoldTextStyles.copyWith(color: AppColors.colorWhite),
+          ),
+          IconButton(
+              onPressed: () => showLangDialog(context),
+              icon: CountryFlag.fromCountryCode(
+                controller.lang.currentLang == 'en' ? 'GB' : 'ID',
+                height: 24,
+                width: 24,
+                borderRadius: 8,
+              )),
+        ],
+      ),
+    );
   }
 
   @override

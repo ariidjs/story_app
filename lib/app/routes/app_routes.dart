@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:story_app/app/core/di/injector.dart';
 import 'package:story_app/app/core/services/auth_service.dart';
 import 'package:story_app/app/features/add_story/screens/preview_screen.dart';
@@ -19,9 +17,12 @@ final goRouter = GoRouter(
       GoRouterRefreshStream(injector.get<AuthService>().authState.stream),
   redirect: (context, state) {
     final auth = injector.get<AuthService>();
-    if (auth.authState.value == AuthState.loggedIn &&
-        state.uri.toString() == '/') {
-      return '/home';
+    if (auth.authState.value == AuthState.loggedIn) {
+      return state.location == '/auth'
+          ? '/home'
+          : state.location == '/'
+              ? '/home'
+              : null;
     } else if (auth.authState.value == AuthState.loggedOut) {
       return '/auth';
     }

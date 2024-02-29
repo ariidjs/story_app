@@ -26,7 +26,7 @@ class _CustomButtonState extends State<CustomButton> {
       iconedButtons: {
         ButtonState.idle: IconedButton(
             text: widget.title,
-            icon: widget.icon ?? Icon(Icons.send),
+            icon: widget.icon ?? const Icon(Icons.send),
             color: AppColors.colorOnPrimary),
         ButtonState.loading: const IconedButton(
           text: "Loading",
