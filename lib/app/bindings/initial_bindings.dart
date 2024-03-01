@@ -4,6 +4,7 @@ import 'package:story_app/app/features/add_story/bindings/add_bindings.dart';
 import 'package:story_app/app/features/auth/bindings/auth_bindings.dart';
 import 'package:story_app/app/features/detail/bindings/detail_binding.dart';
 import 'package:story_app/app/features/home/bindings/home_binding.dart';
+import 'package:story_app/app/features/maps/bindings/maps_binding.dart';
 import 'package:story_app/app/features/splash/bindings/splash_binding.dart';
 
 class InitialBinding implements Bindings {
@@ -15,5 +16,6 @@ class InitialBinding implements Bindings {
     AuthBinding().dependencies();
     DetailBinding().dependencies();
     AddBinding().dependencies();
+    MapsBinding().dependencies();
   }
 }

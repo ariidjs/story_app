@@ -17,6 +17,13 @@ class HomeScreen extends BaseView<HomeController> {
     return AppBar(
       title: const Text('Dicoding Story'),
       centerTitle: true,
+      leading: IconButton(
+        onPressed: () => context.goNamed('maps'),
+        icon: const Icon(
+          Icons.location_pin,
+          color: AppColors.colorBlack,
+        ),
+      ),
       actions: [
         IconButton(
           onPressed: () => showLangDialog(context),

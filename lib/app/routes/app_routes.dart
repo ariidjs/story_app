@@ -6,6 +6,7 @@ import 'package:story_app/app/features/add_story/screens/preview_screen.dart';
 import 'package:story_app/app/features/auth/screens/auth_screen.dart';
 import 'package:story_app/app/features/detail/screens/detail_screen.dart';
 import 'package:story_app/app/features/home/screens/home_screen.dart';
+import 'package:story_app/app/features/maps/screens/maps_screen.dart';
 import 'package:story_app/app/features/splash/screen/splash_screen.dart';
 import 'package:story_app/app/routes/go_router_refresh_stream.dart';
 
@@ -59,7 +60,12 @@ final goRouter = GoRouter(
             builder: (context, state) => DetailScreen(
               id: state.pathParameters['id']!,
             ),
-          )
+          ),
+          GoRoute(
+            path: 'maps',
+            name: 'maps',
+            builder: (context, state) => MapsScreen(),
+          ),
         ]),
   ],
 );
