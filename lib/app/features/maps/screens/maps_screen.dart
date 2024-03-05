@@ -19,6 +19,7 @@ class MapsScreen extends BaseView<MapsController> {
   final dicodingOffice = const LatLng(-6.8957473, 107.6337669);
   @override
   Widget body(BuildContext context) {
+    debugPrint('TEST MAPS ${controller.markers}');
     return Stack(
       children: [
         GoogleMap(
@@ -26,8 +27,13 @@ class MapsScreen extends BaseView<MapsController> {
             zoom: 18,
             target: dicodingOffice,
           ),
-          onMapCreated: (ctx) => controller.ctx.complete(ctx),
-          onCameraMove: (position) => debugPrint('TEST ==${position.target}'),
+          onMapCreated: (ctx) {
+            controller.ctx.complete(ctx);
+            controller.getListStory();
+          },
+          // onCameraMove: (position) => debugPrint('TEST ==${position.target}'),
+          // onCameraIdle: () => debugPrint('TEST IDLE'),
+          markers: controller.markers,
         ),
         Container(
           alignment: AlignmentDirectional.topStart,
