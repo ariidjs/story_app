@@ -13,17 +13,17 @@ class MapsController extends BaseController {
 
   final StoryRepository _repos = Get.find(tag: (StoryRepository).toString());
 
-  final Set<Marker> _markers = <Marker>{}.obs;
-  Set<Marker> get markers => _markers;
+  final markers = <Marker>[].obs;
+  // RxList<Marker> get markers => _markers;
 
   @override
   void onInit() async {
     mapsController = await ctx.future;
-
+    getListStory();
     super.onInit();
   }
 
-  void getListStory() {
+  void getListStory() async {
     callDataService(
       _repos.getStories(),
       onSuccess: (response) async {
@@ -33,16 +33,26 @@ class MapsController extends BaseController {
         for (int i = 0; i < list!.length; i++) {
           debugPrint('TEST maps ${list[i].name}');
           var latLng = LatLng(list[i].lat!, list[i].lon!);
-          final marker = Marker(
-            markerId: const MarkerId("story"),
-            position: latLng,
-            // infoWindow: InfoWindow(
-            //   title: street,
-            //   snippet: address,
-            // ),
-          );
 
-          _markers.add(marker);
+          markers.add(Marker(
+            markerId: MarkerId(list[i].id!),
+            position: latLng,
+            infoWindow: InfoWindow(
+              title: list[i].name,
+              snippet: list[i].description,
+            ),
+          ));
+        }
+        await Future.delayed(Duration(seconds: 3));
+        if (markers.length > 1) {
+          mapsController.animateCamera(CameraUpdate.newLatLngBounds(
+              LatLngBounds(
+                  southwest: markers[1].position,
+                  northeast: markers[0].position),
+              0.0));
+        } else {
+          mapsController.animateCamera(
+              CameraUpdate.newLatLngZoom(markers[0].position, 17.0));
         }
       },
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
@@ -22,18 +23,19 @@ class MapsScreen extends BaseView<MapsController> {
     debugPrint('TEST MAPS ${controller.markers}');
     return Stack(
       children: [
-        GoogleMap(
-          initialCameraPosition: CameraPosition(
-            zoom: 18,
-            target: dicodingOffice,
+        Obx(
+          () => GoogleMap(
+            initialCameraPosition: CameraPosition(
+              zoom: 18,
+              target: dicodingOffice,
+            ),
+            onMapCreated: (ctx) {
+              controller.ctx.complete(ctx);
+            },
+            // onCameraMove: (position) => debugPrint('TEST ==${position.target}'),
+            // onCameraIdle: () => debugPrint('TEST IDLE'),
+            markers: controller.markers.toSet(),
           ),
-          onMapCreated: (ctx) {
-            controller.ctx.complete(ctx);
-            controller.getListStory();
-          },
-          // onCameraMove: (position) => debugPrint('TEST ==${position.target}'),
-          // onCameraIdle: () => debugPrint('TEST IDLE'),
-          markers: controller.markers,
         ),
         Container(
           alignment: AlignmentDirectional.topStart,
@@ -45,29 +47,29 @@ class MapsScreen extends BaseView<MapsController> {
             style: primaryBtn,
           ),
         ),
-        Container(
-          alignment: AlignmentDirectional.topEnd,
-          margin: EdgeInsets.only(right: 16, top: 16),
-          child: IconButton.filled(
-            onPressed: () => controller.mapsController.animateCamera(
-                CameraUpdate.newLatLng(LatLng(-6.200000, 106.816666))),
-            icon: Icon(Icons.my_location),
-            color: AppColors.colorWhite,
-            style: primaryBtn,
-          ),
-        ),
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 24.0),
-            child: AnimatedPin(
-              child: Icon(
-                Icons.place,
-                size: 36,
-                color: AppColors.colorOnPrimary,
-              ),
-            ),
-          ),
-        ),
+        // Container(
+        //   alignment: AlignmentDirectional.topEnd,
+        //   margin: EdgeInsets.only(right: 16, top: 16),
+        //   child: IconButton.filled(
+        //     onPressed: () => controller.mapsController.animateCamera(
+        //         CameraUpdate.newLatLng(LatLng(-6.200000, 106.816666))),
+        //     icon: Icon(Icons.my_location),
+        //     color: AppColors.colorWhite,
+        //     style: primaryBtn,
+        //   ),
+        // ),
+        // Center(
+        //   child: Padding(
+        //     padding: const EdgeInsets.only(bottom: 24.0),
+        //     child: AnimatedPin(
+        //       child: Icon(
+        //         Icons.place,
+        //         size: 36,
+        //         color: AppColors.colorOnPrimary,
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
