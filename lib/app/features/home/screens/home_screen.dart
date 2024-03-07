@@ -5,6 +5,7 @@ import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
 import 'package:story_app/app/core/values/app_styles.dart';
 import 'package:story_app/app/core/widget/no_data_widget.dart';
+import 'package:story_app/app/core/widget/paging_view.dart';
 import 'package:story_app/app/features/home/controllers/home_controller.dart';
 import 'package:story_app/app/features/home/widgets/custom_floating_btn.dart';
 import 'package:story_app/app/features/home/widgets/item_story.dart';
@@ -89,21 +90,23 @@ class HomeScreen extends BaseView<HomeController> {
   }
 
   storyList() {
-    return Obx(
-      () => controller.stories.isNotEmpty
-          ? ListView.separated(
-              shrinkWrap: true,
-              itemCount: controller.stories.length,
-              primary: false,
-              itemBuilder: (context, index) {
-                var model = controller.stories[index];
+    return PagingView(
+        onLoadNextPage: () => controller.onLoadNextPage(),
+        onRefresh: () async => controller.onRefreshPage(),
+        child: Obx(() => controller.stories.isNotEmpty
+            ? ListView.separated(
+                shrinkWrap: true,
+                itemCount: controller.stories.length,
+                physics: const NeverScrollableScrollPhysics(),
+                primary: false,
+                itemBuilder: (context, index) {
+                  var model = controller.stories[index];
 
-                return ItemStory(item: model);
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 0),
-            )
-          : const NoData(),
-    );
+                  return ItemStory(item: model);
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const SizedBox(height: 0),
+              )
+            : const NoData()));
   }
 }

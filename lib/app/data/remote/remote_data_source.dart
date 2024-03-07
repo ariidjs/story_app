@@ -5,6 +5,7 @@ import 'package:story_app/app/data/endpoint.dart';
 import 'package:story_app/app/data/models/requests/add_story_request.dart';
 import 'package:story_app/app/data/models/requests/sign_in_request.dart';
 import 'package:story_app/app/data/models/requests/sign_up_request.dart';
+import 'package:story_app/app/data/models/requests/story_request.dart';
 import 'package:story_app/app/data/models/response/stories_response.dart';
 
 class RemoteDataSource extends BaseRemoteSource {
@@ -30,8 +31,9 @@ class RemoteDataSource extends BaseRemoteSource {
     }
   }
 
-  Future<StoriesResponse> getStories() {
-    var dioCall = dioClientWithAuth.get(Endpoint.stories);
+  Future<StoriesResponse> getStories(StoryRequest form) {
+    var dioCall =
+        dioClientWithAuth.get(Endpoint.stories, queryParameters: form.toMap());
 
     try {
       return callApiWithErrorParser(dioCall)

@@ -3,6 +3,7 @@ import 'package:story_app/app/core/models/auth_response.dart';
 import 'package:story_app/app/data/models/requests/add_story_request.dart';
 import 'package:story_app/app/data/models/requests/sign_in_request.dart';
 import 'package:story_app/app/data/models/requests/sign_up_request.dart';
+import 'package:story_app/app/data/models/requests/story_request.dart';
 import 'package:story_app/app/data/models/response/stories_response.dart';
 import 'package:story_app/app/data/remote/remote_data_source.dart';
 
@@ -20,8 +21,8 @@ class StoryRepository {
     return data.loginResult;
   }
 
-  Future<List<Story>?> getStories() async {
-    var data = await _remoteSource.getStories();
+  Future<List<Story>?> getStories(StoryRequest form) async {
+    var data = await _remoteSource.getStories(form);
     return data.listStory;
   }
 

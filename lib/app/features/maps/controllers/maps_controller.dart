@@ -1,11 +1,17 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:story_app/app/core/base/base.dart';
+import 'package:story_app/app/core/models/ui_state.dart';
+import 'package:story_app/app/core/values/constants.dart';
+import 'package:story_app/app/data/models/requests/story_request.dart';
+import 'package:story_app/app/data/models/response/stories_response.dart';
 import 'package:story_app/app/data/repository/story_repository.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 
 class MapsController extends BaseController {
   final Completer<GoogleMapController> ctx = Completer();
@@ -14,7 +20,14 @@ class MapsController extends BaseController {
   final StoryRepository _repos = Get.find(tag: (StoryRepository).toString());
 
   final markers = <Marker>[].obs;
-  // RxList<Marker> get markers => _markers;
+
+  final _story = Story().obs;
+  Rx<Story> get story => _story;
+
+  final _place = const Placemark().obs;
+  Rx<Placemark> get place => _place;
+
+  final isShowBadge = false.obs;
 
   @override
   void onInit() async {
@@ -25,7 +38,9 @@ class MapsController extends BaseController {
 
   void getListStory() async {
     callDataService(
-      _repos.getStories(),
+      _repos.getStories(StoryRequest(
+          page: Constants.defaultPage.toString(),
+          size: Constants.defaultSize.toString())),
       onSuccess: (response) async {
         var list = response
             ?.where((element) => element.lon != null && element.lat != null)
@@ -37,19 +52,17 @@ class MapsController extends BaseController {
           markers.add(Marker(
             markerId: MarkerId(list[i].id!),
             position: latLng,
-            infoWindow: InfoWindow(
-              title: list[i].name,
-              snippet: list[i].description,
-            ),
+            onTap: () => _showBadge(response![i]),
           ));
         }
-        await Future.delayed(Duration(seconds: 3));
+
         if (markers.length > 1) {
-          mapsController.animateCamera(CameraUpdate.newLatLngBounds(
-              LatLngBounds(
-                  southwest: markers[1].position,
-                  northeast: markers[0].position),
-              0.0));
+          var latLngList = <LatLng>[];
+          for (var element in markers) {
+            latLngList.add(element.position);
+          }
+          mapsController.animateCamera(
+              CameraUpdate.newLatLngBounds(getBounds(latLngList), 50));
         } else {
           mapsController.animateCamera(
               CameraUpdate.newLatLngZoom(markers[0].position, 17.0));
@@ -58,8 +71,32 @@ class MapsController extends BaseController {
     );
   }
 
-  // Future<List<Placemark>> _getAddress() async {
-  //   return await geo.placemarkFromCoordinates(
-  //       dicodingOffice.latitude, dicodingOffice.longitude);
-  // }
+  LatLngBounds getBounds(List<LatLng> markerLocations) {
+    List<double> lngs =
+        markerLocations.map<double>((m) => m.longitude).toList();
+    List<double> lats = markerLocations.map<double>((m) => m.latitude).toList();
+
+    double topMost = lngs.reduce(max);
+    double leftMost = lats.reduce(min);
+    double rightMost = lats.reduce(max);
+    double bottomMost = lngs.reduce(min);
+
+    LatLngBounds bounds = LatLngBounds(
+      northeast: LatLng(rightMost, topMost),
+      southwest: LatLng(leftMost, bottomMost),
+    );
+
+    return bounds;
+  }
+
+  void _showBadge(Story response) async {
+    isShowBadge(true);
+
+    _story(response);
+    updateUiState(UiState.loading);
+    var info = await geo.placemarkFromCoordinates(response.lat!, response.lon!);
+    _place(info[0]);
+    updateUiState(UiState.defaults);
+    debugPrint('TEST badge ${info[0].subLocality}, ${info[0].locality}');
+  }
 }

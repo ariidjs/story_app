@@ -1,13 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
 import 'package:story_app/app/core/values/app_styles.dart';
 import 'package:story_app/app/features/maps/controllers/maps_controller.dart';
-import 'package:story_app/app/features/maps/screens/widgets/animated_pin.dart';
+
+import 'widgets/badge.dart';
 
 class MapsScreen extends BaseView<MapsController> {
   MapsScreen({super.key});
@@ -35,6 +34,7 @@ class MapsScreen extends BaseView<MapsController> {
             // onCameraMove: (position) => debugPrint('TEST ==${position.target}'),
             // onCameraIdle: () => debugPrint('TEST IDLE'),
             markers: controller.markers.toSet(),
+            onTap: (_) => controller.isShowBadge(false),
           ),
         ),
         Container(
@@ -46,6 +46,20 @@ class MapsScreen extends BaseView<MapsController> {
             color: AppColors.colorWhite,
             style: primaryBtn,
           ),
+        ),
+        Obx(
+          () => AnimatedPositioned(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+              left: 0,
+              right: 0,
+              bottom: controller.isShowBadge.value ? 20 : 0,
+              child: controller.isShowBadge.value
+                  ? MapBottomPill(
+                      data: controller.story.value,
+                      place: controller.place.value,
+                    )
+                  : Container()),
         ),
         // Container(
         //   alignment: AlignmentDirectional.topEnd,
