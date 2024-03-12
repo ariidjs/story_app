@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:readmore/readmore.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
 import 'package:story_app/app/core/values/app_styles.dart';
+import 'package:story_app/app/core/widget/loading.dart';
 import 'package:story_app/app/data/models/response/stories_response.dart';
 
 class ItemStory extends StatelessWidget {
@@ -39,11 +41,13 @@ class ItemStory extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16.0),
-            Image.network(
-              item.photoUrl ?? '',
+            CachedNetworkImage(
+              imageUrl: item.photoUrl ?? '',
               height: 300,
               width: double.infinity,
               fit: BoxFit.fill,
+              placeholder: (context, url) => const Loading(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             const SizedBox(height: 16.0),
             Padding(

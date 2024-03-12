@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:story_app/app/core/utils/debouncer.dart';
+import 'package:story_app/app/core/values/app_colors.dart';
 
 ///ignore: must_be_immutable
 class PagingView extends StatelessWidget {
@@ -46,6 +47,8 @@ class PagingView extends StatelessWidget {
           : RefreshIndicator(
               child: _getScrollableView(),
               onRefresh: onRefresh!,
+              color: AppColors.colorOnPrimary,
+              backgroundColor: AppColors.colorWhite,
             ),
     );
   }

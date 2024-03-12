@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:story_app/app/core/di/injector.dart';
 import 'package:story_app/app/core/services/auth_service.dart';
+import 'package:story_app/app/features/add_story/models/add_models.dart';
+import 'package:story_app/app/features/add_story/screens/maps_picker.dart';
 import 'package:story_app/app/features/add_story/screens/preview_screen.dart';
 import 'package:story_app/app/features/auth/screens/auth_screen.dart';
 import 'package:story_app/app/features/detail/screens/detail_screen.dart';
@@ -51,7 +53,7 @@ final goRouter = GoRouter(
             path: 'preview',
             name: 'preview',
             builder: (context, state) => PreviewScreen(
-              photoPath: state.extra as String,
+              photoPath: state.queryParameters['photo_path'] as String,
             ),
           ),
           GoRoute(
@@ -66,6 +68,13 @@ final goRouter = GoRouter(
             name: 'maps',
             builder: (context, state) => MapsScreen(),
           ),
+          GoRoute(
+            path: 'picker',
+            name: 'picker',
+            builder: (context, state) => MapsPicker(
+              data: state.extra as AddModels,
+            ),
+          )
         ]),
   ],
 );

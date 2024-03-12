@@ -23,62 +23,65 @@ class DetailScreen extends BaseView<DetailController> {
   @override
   Widget body(BuildContext context) {
     return Obx(
-      () => Container(
-        color: AppColors.colorBlack,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 36,
-                    width: 36,
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.colorOnPrimary,
-                      child: Icon(Icons.person),
-                    ),
-                  ),
-                  const SizedBox(width: 12.0),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(controller.story.name ?? '',
-                            style: normalBoldTextStyles.copyWith(
-                                color: AppColors.colorWhite)),
-                        Text(controller.story.description ?? '',
-                            style: smallTextStyles.copyWith(
-                                color: AppColors.colorWhite)),
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () => context.goNamed('home'),
-                      icon: const Icon(
-                        Icons.close,
-                        color: AppColors.colorWhite,
-                      ))
-                ],
-              ),
-            ),
-            controller.uiState == UiState.loading
-                ? const Loading()
-                : Expanded(
-                    child: Center(
-                      child: CachedNetworkImage(
-                        imageUrl: controller.story.photoUrl!,
-                        placeholder: (context, url) => const Loading(),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+      () => GestureDetector(
+        onVerticalDragDown: (_) => Get.back(),
+        child: Container(
+          color: AppColors.colorBlack,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 36,
+                      width: 36,
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.colorOnPrimary,
+                        child: Icon(Icons.person),
                       ),
                     ),
-                  )
-          ],
+                    const SizedBox(width: 12.0),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(controller.story.name ?? '',
+                              style: normalBoldTextStyles.copyWith(
+                                  color: AppColors.colorWhite)),
+                          Text(controller.story.description ?? '',
+                              style: smallTextStyles.copyWith(
+                                  color: AppColors.colorWhite)),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () => context.goNamed('home'),
+                        icon: const Icon(
+                          Icons.close,
+                          color: AppColors.colorWhite,
+                        ))
+                  ],
+                ),
+              ),
+              controller.uiState == UiState.loading
+                  ? const Loading()
+                  : Expanded(
+                      child: Center(
+                        child: CachedNetworkImage(
+                          imageUrl: controller.story.photoUrl!,
+                          placeholder: (context, url) => const Loading(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      ),
+                    )
+            ],
+          ),
         ),
       ),
     );

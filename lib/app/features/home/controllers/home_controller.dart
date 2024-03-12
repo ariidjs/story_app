@@ -48,7 +48,8 @@ class HomeController extends BaseController {
     } else {
       storyPagingController.appendPage(response);
     }
-    _storiesController(storyPagingController.listItems);
+    var storyList = [...storyPagingController.listItems];
+    _storiesController(storyList);
   }
 
   onRefreshPage() {
@@ -63,6 +64,6 @@ class HomeController extends BaseController {
   }
 
   bool _isLastPage(int newListItemCount, int totalCount) {
-    return (stories.length + newListItemCount) >= totalCount;
+    return newListItemCount < totalCount;
   }
 }

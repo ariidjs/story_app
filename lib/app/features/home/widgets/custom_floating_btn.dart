@@ -74,6 +74,6 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton>
   }
 
   void routeToPreview(XFile file) {
-    context.go('/home/preview', extra: file.path);
+    context.goNamed('preview', queryParameters: {'photo_path': file.path});
   }
 }

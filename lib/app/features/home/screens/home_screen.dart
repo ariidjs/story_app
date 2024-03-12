@@ -84,9 +84,7 @@ class HomeScreen extends BaseView<HomeController> {
 
   @override
   Widget body(BuildContext context) {
-    return SingleChildScrollView(
-      child: storyList(),
-    );
+    return storyList();
   }
 
   storyList() {
