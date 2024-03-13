@@ -5,21 +5,70 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "story_app",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "story_app (profile mode)",
+            "name": "free_debug",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "story_app (release mode)",
+            "program": "lib/main_free.dart",
+            "flutterMode": "debug",
+            "args": [
+              "--flavor",
+              "free"
+            ]
+          },
+          {
+            "name": "free_profile",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
-        }
+            "program": "lib/main_free.dart",
+            "flutterMode": "profile",
+            "args": [
+              "--flavor",
+              "free"
+            ]
+          },
+          {
+            "name": "free_release",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_free.dart",
+            "flutterMode": "release",
+            "args": [
+              "--flavor",
+              "free"
+            ]
+          },
+          {
+            "name": "paid_debug",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_paid.dart",
+            "flutterMode": "debug",
+            "args": [
+              "--flavor",
+              "paid"
+            ]
+          },
+          {
+            "name": "paid_profile",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_paid.dart",
+            "flutterMode": "profile",
+            "args": [
+              "--flavor",
+              "paid"
+            ]
+          },
+          {
+            "name": "paid_release",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_paid.dart",
+            "flutterMode": "release",
+            "args": [
+              "--flavor",
+              "paid"
+            ]
+          }
     ]
 }

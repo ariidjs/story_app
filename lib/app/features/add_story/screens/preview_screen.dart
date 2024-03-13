@@ -79,10 +79,8 @@ class PreviewScreen extends BaseView<AddController> {
                               Icons.send,
                               color: AppColors.colorOnPrimary,
                             ),
-                            onPressed: () => context.goNamed('picker',
-                                extra: AddModels(
-                                    photoPath: photoPath,
-                                    desc: descController.text)),
+                            onPressed: () => controller.addStory(
+                                descController.text, photoPath),
                           ),
                   ],
                 ),

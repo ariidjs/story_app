@@ -1,0 +1,1 @@
+enum Environment { free, paid }

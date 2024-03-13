@@ -61,29 +61,6 @@ class MapsScreen extends BaseView<MapsController> {
                     )
                   : Container()),
         ),
-        // Container(
-        //   alignment: AlignmentDirectional.topEnd,
-        //   margin: EdgeInsets.only(right: 16, top: 16),
-        //   child: IconButton.filled(
-        //     onPressed: () => controller.mapsController.animateCamera(
-        //         CameraUpdate.newLatLng(LatLng(-6.200000, 106.816666))),
-        //     icon: Icon(Icons.my_location),
-        //     color: AppColors.colorWhite,
-        //     style: primaryBtn,
-        //   ),
-        // ),
-        // Center(
-        //   child: Padding(
-        //     padding: const EdgeInsets.only(bottom: 24.0),
-        //     child: AnimatedPin(
-        //       child: Icon(
-        //         Icons.place,
-        //         size: 36,
-        //         color: AppColors.colorOnPrimary,
-        //       ),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }

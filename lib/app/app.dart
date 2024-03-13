@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:story_app/app/core/di/injector.dart';
 import 'package:story_app/app/core/services/language_controller.dart';
 import 'package:story_app/app/routes/app_routes.dart';
+import 'package:story_app/flavors/build_config.dart';
+import 'package:story_app/flavors/env_config.dart';
 
 import 'bindings/initial_bindings.dart';
 import 'core/values/app_colors.dart';
@@ -16,11 +18,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final EnvConfig _envConfig = BuildConfig.instance.config;
+
   @override
   Widget build(BuildContext context) {
     final langController = injector.get<LanguageController>();
     return GetMaterialApp.router(
-      title: 'Story App',
+      title: _envConfig.appName,
       initialBinding: InitialBinding(),
       routeInformationParser: goRouter.routeInformationParser,
       routerDelegate: goRouter.routerDelegate,

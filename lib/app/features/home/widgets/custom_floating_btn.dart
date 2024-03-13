@@ -45,8 +45,8 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton>
           icon: Icons.camera_alt,
           titleStyle: normalBoldTextStyles,
           onPress: () async {
-            final pickedFile =
-                await _picker.pickImage(source: ImageSource.camera);
+            final pickedFile = await _picker.pickImage(
+                source: ImageSource.camera, imageQuality: 75);
             pickedFile != null ? routeToPreview(pickedFile) : null;
           },
         ),
@@ -57,8 +57,8 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton>
           icon: Icons.photo,
           titleStyle: normalBoldTextStyles,
           onPress: () async {
-            final pickedFile =
-                await _picker.pickImage(source: ImageSource.gallery);
+            final pickedFile = await _picker.pickImage(
+                source: ImageSource.gallery, imageQuality: 75);
             pickedFile != null ? routeToPreview(pickedFile) : null;
           },
         ),

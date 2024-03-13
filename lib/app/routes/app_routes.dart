@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:story_app/app/core/di/injector.dart';
 import 'package:story_app/app/core/services/auth_service.dart';
 import 'package:story_app/app/features/add_story/models/add_models.dart';
-import 'package:story_app/app/features/add_story/screens/maps_picker.dart';
+import 'package:story_app/app/features/maps/screens/maps_picker.dart';
 import 'package:story_app/app/features/add_story/screens/preview_screen.dart';
 import 'package:story_app/app/features/auth/screens/auth_screen.dart';
 import 'package:story_app/app/features/detail/screens/detail_screen.dart';
