@@ -1,3 +1,7 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'add_models.g.dart';
+
+@JsonSerializable()
 class AddModels {
   final String photoPath;
   final String desc;

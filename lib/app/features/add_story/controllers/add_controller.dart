@@ -18,7 +18,6 @@ class AddController extends BaseController {
     final EnvConfig envConfig = BuildConfig.instance.config;
     if (envConfig.hasUniqueFeature) {
       if (desc.isNotEmpty) {
-        //todo
         goRouter.goNamed('picker',
             extra: AddModels(photoPath: photoPath, desc: desc));
       } else {
@@ -38,7 +37,7 @@ class AddController extends BaseController {
       _repos.addStories(
           AddStoryRequest(desc: desc, photoPath: File(photoPath).path)),
       onSuccess: (_) {
-        _homeController.getStories();
+        _homeController.onRefreshPage();
         goRouter.goNamed('home');
       },
     );

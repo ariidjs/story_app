@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -45,27 +44,30 @@ class MapsController extends BaseController {
         var list = response
             ?.where((element) => element.lon != null && element.lat != null)
             .toList();
-        for (int i = 0; i < list!.length; i++) {
-          debugPrint('TEST maps ${list[i].name}');
-          var latLng = LatLng(list[i].lat!, list[i].lon!);
+        if (list!.isNotEmpty) {
+          for (int i = 0; i < list.length; i++) {
+            var latLng = LatLng(list[i].lat!, list[i].lon!);
 
-          markers.add(Marker(
-            markerId: MarkerId(list[i].id!),
-            position: latLng,
-            onTap: () => _showBadge(response![i]),
-          ));
-        }
-
-        if (markers.length > 1) {
-          var latLngList = <LatLng>[];
-          for (var element in markers) {
-            latLngList.add(element.position);
+            markers.add(Marker(
+              markerId: MarkerId(list[i].id!),
+              position: latLng,
+              onTap: () => showBadge(response![i]),
+            ));
           }
-          mapsController.animateCamera(
-              CameraUpdate.newLatLngBounds(getBounds(latLngList), 50));
+
+          if (markers.length > 1) {
+            var latLngList = <LatLng>[];
+            for (var element in markers) {
+              latLngList.add(element.position);
+            }
+            mapsController.animateCamera(
+                CameraUpdate.newLatLngBounds(getBounds(latLngList), 50));
+          } else {
+            mapsController.animateCamera(
+                CameraUpdate.newLatLngZoom(markers[0].position, 17.0));
+          }
         } else {
-          mapsController.animateCamera(
-              CameraUpdate.newLatLngZoom(markers[0].position, 17.0));
+          showErrorMessage(AppLocalizations.of(Get.context!)!.noLocationStory);
         }
       },
     );
@@ -89,7 +91,7 @@ class MapsController extends BaseController {
     return bounds;
   }
 
-  void _showBadge(Story response) async {
+  void showBadge(Story response) async {
     isShowBadge(true);
 
     _story(response);
@@ -97,6 +99,5 @@ class MapsController extends BaseController {
     var info = await geo.placemarkFromCoordinates(response.lat!, response.lon!);
     _place(info[0]);
     updateUiState(UiState.defaults);
-    debugPrint('TEST badge ${info[0].subLocality}, ${info[0].locality}');
   }
 }

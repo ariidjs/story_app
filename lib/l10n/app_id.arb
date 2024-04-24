@@ -24,5 +24,8 @@
     "logout" : "Keluar dari akun?",
     "logoutDesc": "Apakah anda yakin keluar dari akun? Anda akan diarahkan ke halaman login",
     "yes" : "Ya",
-    "no" : "Tidak"
+    "no" : "Tidak",
+    "chooseArea" : "Pilih lokasi ini",
+    "noLocationStory" : "Tidak ada story yang menggunakan lokasi saat ini",
+    "seeMaps" : "Lihat peta"
 }

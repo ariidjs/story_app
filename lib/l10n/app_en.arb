@@ -24,5 +24,8 @@
     "logout" : "Logout account?",
     "logoutDesc": "Are you sure want to logout? You will direct to Sign in page",
     "yes" : "Yes",
-    "no" : "No"
+    "no" : "No",
+    "chooseArea" : "Choose this area",
+    "noLocationStory" : "There is no story with location right now",
+    "seeMaps" : "See maps"
 }

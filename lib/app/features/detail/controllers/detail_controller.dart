@@ -6,6 +6,7 @@ import 'package:story_app/app/data/repository/story_repository.dart';
 class DetailController extends BaseController {
   final StoryRepository _repos = Get.find(tag: (StoryRepository).toString());
 
+  final isShowBadge = false.obs;
   final Rx<Story> _story = Story().obs;
   Story get story => _story.value;
 

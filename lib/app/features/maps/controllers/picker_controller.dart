@@ -64,7 +64,8 @@ class PickerController extends BaseController {
     updateUiState(UiState.defaults);
   }
 
-  void postStoryWithLocation(AddModels data) {
+  void postStoryWithLocation(AddModels data) async {
+    debugPrint('TEST ${pickerLatLng.value.latitude}');
     callDataService(
       _repos.addStories(
         AddStoryRequest(
@@ -74,7 +75,7 @@ class PickerController extends BaseController {
             long: pickerLatLng.value.longitude.toString()),
       ),
       onSuccess: (_) {
-        _homeController.getStories();
+        _homeController.onRefreshPage();
         goRouter.goNamed('home');
       },
     );

@@ -1,5 +1,8 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'sign_in_request.g.dart';
+
+@JsonSerializable()
 class SignInRequest {
   String email;
   String password;
@@ -8,45 +11,8 @@ class SignInRequest {
     required this.password,
   });
 
-  SignInRequest copyWith({
-    String? email,
-    String? password,
-  }) {
-    return SignInRequest(
-      email: email ?? this.email,
-      password: password ?? this.password,
-    );
-  }
+  factory SignInRequest.fromJson(Map<String, dynamic> json) =>
+      _$SignInRequestFromJson(json);
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'email': email,
-      'password': password,
-    };
-  }
-
-  factory SignInRequest.fromMap(Map<String, dynamic> map) {
-    return SignInRequest(
-      email: map['email'] as String,
-      password: map['password'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory SignInRequest.fromJson(String source) =>
-      SignInRequest.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'SignInRequest(email: $email, password: $password)';
-
-  @override
-  bool operator ==(covariant SignInRequest other) {
-    if (identical(this, other)) return true;
-
-    return other.email == email && other.password == password;
-  }
-
-  @override
-  int get hashCode => email.hashCode ^ password.hashCode;
+  Map<String, dynamic> toJson() => _$SignInRequestToJson(this);
 }

@@ -34,7 +34,7 @@ class PickerBaloon extends StatelessWidget {
                   onPressed: () => onPick(),
                   style: primaryBtn,
                   label: Text(
-                    'Choose this area',
+                    AppLocalizations.of(context)!.chooseArea,
                     style:
                         normalTextStyles.copyWith(color: AppColors.colorWhite),
                   ),

@@ -19,7 +19,6 @@ class MapsScreen extends BaseView<MapsController> {
   final dicodingOffice = const LatLng(-6.8957473, 107.6337669);
   @override
   Widget body(BuildContext context) {
-    debugPrint('TEST MAPS ${controller.markers}');
     return Stack(
       children: [
         Obx(
@@ -31,18 +30,16 @@ class MapsScreen extends BaseView<MapsController> {
             onMapCreated: (ctx) {
               controller.ctx.complete(ctx);
             },
-            // onCameraMove: (position) => debugPrint('TEST ==${position.target}'),
-            // onCameraIdle: () => debugPrint('TEST IDLE'),
             markers: controller.markers.toSet(),
             onTap: (_) => controller.isShowBadge(false),
           ),
         ),
         Container(
           alignment: AlignmentDirectional.topStart,
-          margin: EdgeInsets.only(left: 8, top: 8),
+          margin: const EdgeInsets.only(left: 8, top: 8),
           child: IconButton.filled(
-            onPressed: () {},
-            icon: Icon(Icons.arrow_back),
+            onPressed: () => Get.back(),
+            icon: const Icon(Icons.arrow_back),
             color: AppColors.colorWhite,
             style: primaryBtn,
           ),

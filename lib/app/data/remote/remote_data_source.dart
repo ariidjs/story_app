@@ -10,7 +10,7 @@ import 'package:story_app/app/data/models/response/stories_response.dart';
 
 class RemoteDataSource extends BaseRemoteSource {
   Future<AuthResponse> signUp(SignUpRequest form) {
-    var dioCall = dioClient.post(Endpoint.signUp, data: form.toMap());
+    var dioCall = dioClient.post(Endpoint.signUp, data: form.toJson());
 
     try {
       return callApiWithErrorParser(dioCall)
@@ -21,7 +21,7 @@ class RemoteDataSource extends BaseRemoteSource {
   }
 
   Future<AuthResponse> signIn(SignInRequest form) {
-    var dioCall = dioClient.post(Endpoint.signIn, data: form.toMap());
+    var dioCall = dioClient.post(Endpoint.signIn, data: form.toJson());
 
     try {
       return callApiWithErrorParser(dioCall)
@@ -33,7 +33,7 @@ class RemoteDataSource extends BaseRemoteSource {
 
   Future<StoriesResponse> getStories(StoryRequest form) {
     var dioCall =
-        dioClientWithAuth.get(Endpoint.stories, queryParameters: form.toMap());
+        dioClientWithAuth.get(Endpoint.stories, queryParameters: form.toJson());
 
     try {
       return callApiWithErrorParser(dioCall)
@@ -48,7 +48,9 @@ class RemoteDataSource extends BaseRemoteSource {
     var dioCall = dioClientWithAuth.post(Endpoint.stories,
         data: FormData.fromMap({
           'description': form.desc,
-          'photo': await MultipartFile.fromFile(form.photoPath)
+          'photo': await MultipartFile.fromFile(form.photoPath),
+          'lat': form.lat ?? '',
+          'lon': form.long ?? ''
         }));
 
     try {

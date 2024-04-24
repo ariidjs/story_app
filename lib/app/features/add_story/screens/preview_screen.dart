@@ -2,13 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:story_app/app/core/base/base.dart';
 import 'package:story_app/app/core/models/ui_state.dart';
 import 'package:story_app/app/core/values/app_colors.dart';
 import 'package:story_app/app/core/values/app_styles.dart';
 import 'package:story_app/app/features/add_story/controllers/add_controller.dart';
-import 'package:story_app/app/features/add_story/models/add_models.dart';
 
 class PreviewScreen extends BaseView<AddController> {
   final String photoPath;
